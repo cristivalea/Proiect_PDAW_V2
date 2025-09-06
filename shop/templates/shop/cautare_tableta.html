@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Căutare Laptop - Administrator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #d50000;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            position: relative;
+        }
+
+        .header-icons a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        nav a:hover {
+            background-color: #444;
+        }
+
+        main {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d50000;
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-form input[type="text"] {
+            padding: 10px;
+            font-size: 1.2em;
+            width: 80%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            transition: border 0.3s;
+        }
+
+        .search-form input[type="text"]:focus {
+            border-color: #d50000;
+        }
+
+        .search-form button {
+            background-color: #d50000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-form button:hover {
+            background-color: #c40000;
+        }
+
+        .results {
+            margin-top: 30px;
+            width: 80%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .results table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .results th, .results td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .results th {
+            background-color: #f4f4f4;
+        }
+
+        .results tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .select-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .select-btn:hover {
+            background-color: #45a049;
+        }
+
+        .selected {
+            background-color: #e6f7ff;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .edit-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #0b7dda;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #da190b;
+        }
+
+        .no-results {
+            color: red;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Magazin Electronice - Admin</div>
+        <div class="header-icons">
+            <a href="#"><i class="fas fa-user"></i></a>
+            <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </header>
+
+
+    <main>
+        <h1>Căutare Tableta după Marca</h1>
+
+        <form method="post" class="search-form" id="searchForm">
+            {% csrf_token %}
+            <input type="text" id="marca" name="marca" placeholder="Introdu marca" required value="{{ marca|default:'' }}">
+            <button type="submit">Căutare</button>
+        </form>
+
+        {% if tablete %}
+        <div class="results">
+            <h2>Rezultate Căutare</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Selectare</th>
+                        <th>Serie</th>
+                        <th>Model</th>
+                        <th>Preț</th>
+                        <th>Memorie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tableta in tablete %}
+                        <tr id="row-{{ tableta.SerieTableta }}" onclick="selectRow('{{ tableta.SerieTableta }}')">
+                            <td><button class="select-btn" onclick="selectRow('{{ tableta.SerieTableta }}'); return false;">Selectează</button></td>
+                            <td>{{ tableta.SerieTableta }}</td>
+                            <td>{{ laptop.Brand }}</td>
+                            <td>{{ laptop.pret }} lei</td>
+                            <td>{{ laptop.CapacitateMemorie}} GB</td>
+                            <td>{{ laptop.SistemOperare }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <button class="action-btn edit-btn" onclick="editSelected()">Editează</button>
+                <button class="action-btn delete-btn" onclick="deleteSelected()">Șterge</button>
+            </div>
+        </div>
+        {% elif marca %}
+            <p class="no-results">Nu s-au găsit laptopuri pentru marca "{{ marca }}"!</p>
+        {% endif %}
+    </main>
+
+    <script>
+        let selectedTableta = null;
+
+        function selectRow(serial) {
+            // Remove selection from all rows
+            document.querySelectorAll('tbody tr').forEach(row => {
+                row.classList.remove('selected');
+            });
+
+            // Add selection to clicked row
+            const row = document.getElementById(`row-${serial}`);
+            row.classList.add('selected');
+
+            // Update selected laptop
+            selectedTableta = serial;
+
+            // Show action buttons
+            document.getElementById('actionButtons').style.display = 'flex';
+        }
+
+        function editSelected() {
+            if (selectedTableta) {
+                // Redirect to edit page with the selected laptop's serial
+                window.location.href = `/edit_tableta/${selectedTableta}/`;
+            } else {
+                alert('Selectați un laptop pentru editare!');
+            }
+        }
+
+        function deleteSelected() {
+            if (selectedTableta) {
+                if (confirm(`Sunteți sigur că doriți să ștergeți tabelta cu seria ${selectedTableta}?`)) {
+                    // Submit a form to delete the laptop
+                    const form = document.createElement('form');
+                    form.method = 'post';
+                    form.action = '/delete_tableta/';
+
+                    const csrf = document.createElement('input');
+                    csrf.type = 'hidden';
+                    csrf.name = 'csrfmiddlewaretoken';
+                    csrf.value = document.querySelector('#searchForm input[name="csrfmiddlewaretoken"]').value;
+                    form.appendChild(csrf);
+
+                    const serialInput = document.createElement('input');
+                    serialInput.type = 'hidden';
+                    serialInput.name = 'SerieTableta';
+                    serialInput.value = selectedTableta;
+                    form.appendChild(serialInput);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            } else {
+                alert('Selectați un laptop pentru ștergere!');
+            }
+        }
+
+        // Auto-focus search input on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('marca').focus();
+        });
+    </script>
+</body>
+</html>

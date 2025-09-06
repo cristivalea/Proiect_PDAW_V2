@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Plasează Comanda</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #d50000;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #d50000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b00000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Plasează comanda</h2>
+        <form method="post" action="{% url 'place_order' %}">
+            {% csrf_token %}
+
+            <label for="payment_method">Metoda de plată:</label>
+            <select id="payment_method" name="payment_method" required>
+                <option value="">Alege metoda</option>
+                <option value="Card">Card bancar</option>
+                <option value="Ramburs">Plată la livrare</option>
+                <option value="Transfer">Transfer bancar</option>
+            </select>
+
+            <label for="shipping_address">Adresă de livrare:</label>
+            <textarea id="shipping_address" name="shipping_address" rows="4" required></textarea>
+
+            <button type="submit">Trimite comanda</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Laptopuri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        nav {
+            background-color: #343a40;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            margin: 30px 0 20px;
+            color: #212529;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 0 40px 40px;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: red;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 15px;
+        }
+        .card ul li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .btn-select {
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-select:hover {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">Acasă</a>
+        <a href="/telefoane/">Telefoane</a>
+        <a href="/tablete/">Tablete</a>
+        <a href="/laptopuri/">Laptopuri</a>
+    </nav>
+
+    <h1>Toate Laptopurile</h1>
+
+    <div class="container">
+        {% for laptop in laptopuri %}
+        <div class="card">
+            <h2>{{ laptop.brand }} {{ laptop.model }}</h2>
+            <ul>
+                <li><strong>Tip:</strong> {{ laptop.tip_laptop }}</li>
+                <li><strong>Procesor:</strong> {{ laptop.procesor }}</li>
+                <li><strong>RAM:</strong> {{ laptop.memorie_ram }} GB</li>
+                <li><strong>Stocare:</strong> {{ laptop.stocare }} {{ laptop.unitati_masura }}</li>
+                <li><strong>Placă video:</strong> {{ laptop.gpu }}</li>
+                <li><strong>Display:</strong> {{ laptop.display }}</li>
+                <li><strong>Porturi:</strong> {{ laptop.porturi }}</li>
+                <li><strong>OS:</strong> {{ laptop.sistem_operare }}</li>
+                <li><strong>Greutate:</strong> {{ laptop.greutate }} kg</li>
+                <li><strong>Preț:</strong> {{ laptop.pret }} RON</li>
+                <li><strong>Rating:</strong> {{ laptop.nota_produs }}/5</li>
+                <li><strong>Disponibilitate:</strong>
+                    {% if laptop.disponibilitate %}
+                        În stoc
+                    {% else %}
+                        Indisponibil
+                    {% endif %}
+                </li>
+                <li><strong>Livrare:</strong> {{ laptop.optiune_livrare }}</li>
+            </ul>
+            <a href="{% url 'detalii_laptop' laptop.serielaptop %}" class="btn-select">Selectează</a>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

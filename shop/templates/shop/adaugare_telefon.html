@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adaugă Tabletă</title>
+    <title>Adaugă Telefon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -95,19 +95,19 @@
         </div>
     </header>
 
-    <nav>
-        <a href="#">Dashboard</a>
-        <a href="#">Adaugă Laptop</a>
-        <a href="#">Adaugă Telefon</a>
-        <a href="#">Adaugă Tabletă</a>
-    </nav>
+{#    <nav>#}
+{#        <a href="#">Dashboard</a>#}
+{#        <a href="#">Adaugă Laptop</a>#}
+{#        <a href="#">Adaugă Telefon</a>#}
+{#        <a href="#">Adaugă Tabletă</a>#}
+{#    </nav>#}
 
     <main>
-        <h1>Adaugă Tabletă Nouă</h1>
+        <h1>Adaugă Telefon Nouă</h1>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="button">Adaugă Tabletă</button>
+            <button type="submit" class="button">Adaugă Telefon/button>
         </form>
     </main>
  <script>

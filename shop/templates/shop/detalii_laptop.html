@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalii Laptop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        nav {
+            background-color: #343a40;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            margin: 30px 0 20px;
+            color: #212529;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 0 20px 40px;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: red;
+            text-align: center;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+        .card ul li {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .btn-back {
+            display: inline-block;
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-back:hover {
+            background-color: darkred;
+        }
+        .button-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">Acasă</a>
+        <a href="/telefoane/">Telefoane</a>
+        <a href="/tablete/">Tablete</a>
+        <a href="/laptopuri/">Laptopuri</a>
+    </nav>
+
+    <h1>Detalii Laptop</h1>
+
+    <div class="container">
+        <div class="card">
+            <h2>{{ laptop.brand }} {{ laptop.model }}</h2>
+            <ul>
+                <li><strong>Tip:</strong> {{ laptop.tip_laptop }}</li>
+                <li><strong>Procesor:</strong> {{ laptop.procesor }}</li>
+                <li><strong>Memorie RAM:</strong> {{ laptop.memorie_ram }} GB</li>
+                <li><strong>Stocare:</strong> {{ laptop.stocare }} {{ laptop.unitati_masura }}</li>
+                <li><strong>GPU:</strong> {{ laptop.gpu }}</li>
+                <li><strong>Display:</strong> {{ laptop.display }}</li>
+                <li><strong>Porturi:</strong> {{ laptop.porturi }}</li>
+                <li><strong>OS:</strong> {{ laptop.sistem_operare }}</li>
+                <li><strong>Greutate:</strong> {{ laptop.greutate }} kg</li>
+                <li><strong>Preț:</strong> {{ laptop.pret }} RON</li>
+                <li><strong>Rating:</strong> {{ laptop.nota_produs }}/5</li>
+                <li><strong>Disponibilitate:</strong>
+                    {% if laptop.disponibilitate %}
+                        În stoc
+                    {% else %}
+                        Indisponibil
+                    {% endif %}
+                </li>
+                <li><strong>Livrare:</strong> {{ laptop.optiune_livrare }}</li>
+            </ul>
+            <div class="button-wrapper">
+                <a href="/laptopuri/" class="btn-back">Înapoi la listă</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

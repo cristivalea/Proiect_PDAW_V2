@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Editare Utilizator</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background-color: #f4f4f4; }
+        form { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        label { display: block; margin-top: 10px; }
+        input[type="text"], input[type="email"] { width: 100%; padding: 8px; }
+        input[type="checkbox"] { margin-right: 5px; }
+        button { margin-top: 15px; padding: 10px 20px; background: #d50000; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #b00000; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Editare Utilizator</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>Prenume:</label>
+        <input type="text" name="first_name" value="{{ utilizator.first_name }}">
+
+        <label>Nume:</label>
+        <input type="text" name="last_name" value="{{ utilizator.last_name }}">
+
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ utilizator.email }}">
+
+        <label>Username:</label>
+        <input type="text" name="username" value="{{ utilizator.username }}">
+
+        <label><input type="checkbox" name="is_staff" {% if utilizator.is_staff %}checked{% endif %}> Este staff</label>
+        <label><input type="checkbox" name="is_active" {% if utilizator.is_active %}checked{% endif %}> Activ</label>
+
+        <button type="submit">Salvează</button>
+    </form>
+</body>
+</html>

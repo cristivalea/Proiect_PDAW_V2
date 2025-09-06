@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editare Telefon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+     <style>
+        /* Stiluri CSS păstrate identice */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; }
+        header { background-color: #d50000; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8em; font-weight: bold; }
+        .header-icons { display: flex; gap: 20px; }
+        .header-icons a { color: white; text-decoration: none; font-size: 1.2em; }
+        main { padding: 40px 20px; text-align: center; }
+        h1 { color: #d50000; margin-bottom: 30px; }
+        form { background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 90%; max-width: 600px; margin: 0 auto; }
+        label { display: block; margin: 15px 0 5px; text-align: left; }
+        input[type="text"], input[type="number"], input[type="float"] { width: 100%; padding: 10px; font-size: 1em; border: 1px solid #ccc; border-radius: 5px; transition: border 0.3s; }
+        input:focus { border-color: #d50000; }
+        button { margin-top: 20px; background-color: #d50000; color: white; padding: 12px 25px; border: none; border-radius: 5px; font-size: 1.1em; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #c40000; }
+        .back-link { margin-top: 20px; display: inline-block; color: #d50000; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">Magazin Electronice - Admin</div>
+    <div class="header-icons">
+        <a href="#"><i class="fas fa-user"></i></a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+</header>
+
+<main>
+    <h1>Editare Telefon</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="SerieTelefon">Serie Telefon</label>
+        <input type="text" id="SerieTelefon" name="SerieTelefon" value="{{ telefon.SerieTelefon }}" readonly>
+
+        <label for="SistemOperare">Sistem de Operare</label>
+        <input type="text" id="SistemOperare" name="SistemOperare" value="{{ telefon.SistemOperare }}" required>
+
+        <label for="Brand">Brand</label>
+        <input type="text" id="Brand" name="Brand" value="{{ telefon.Brand }}" required>
+
+        <label for="Model">Model</label>
+        <input type="text" id="Model" name="Model" value="{{ telefon.Model }}" required>
+
+        <label for="CapacitateRAM">Capacitate RAM (MB)</label>
+        <input type="number" id="CapacitateRAM" name="CapacitateRAM" value="{{ telefon.CapacitateRAM }}" required>
+
+        <label for="CapacitateMemorie">Capacitate Memorie (MB)</label>
+        <input type="number" id="CapacitateMemorie" name="CapacitateMemorie" value="{{ telefon.CapacitateMemorie }}" required>
+
+        <label for="Culoare">Culoare</label>
+        <input type="text" id="Culoare" name="Culoare" value="{{ telefon.Culoare }}" required>
+
+        <label for="Lungime">Lungime (mm)</label>
+        <input type="number" id="Lungime" name="Lungime" value="{{ telefon.Lungime }}" required>
+
+        <label for="Latime">Lățime (mm)</label>
+        <input type="number" id="Latime" name="Latime" value="{{ telefon.Latime }}" required>
+
+        <label for="Grosime">Grosime (mm)</label>
+        <input type="number" id="Grosime" name="Grosime" value="{{ telefon.Grosime }}" required>
+
+        <label for="Diagonala">Diagonală (inch)</label>
+        <input type="number" step="0.1" id="Diagonala" name="Diagonala" value="{{ telefon.Diagonala }}" required>
+
+        <label for="Greutate">Greutate (g)</label>
+        <input type="number" step="0.1" id="Greutate" name="Greutate" value="{{ telefon.Greutate }}" required>
+
+        <label for="CapacitateAcumulator">Capacitate Acumulator (mAh)</label>
+        <input type="number" id="CapacitateAcumulator" name="CapacitateAcumulator" value="{{ telefon.CapacitateAcumulator }}" required>
+
+        <label for="Material">Material</label>
+        <input type="text" id="Material" name="Material" value="{{ telefon.Material }}" required>
+
+        <label for="Rezolutie">Rezoluție</label>
+        <input type="text" id="Rezolutie" name="Rezolutie" value="{{ telefon.Rezolutie }}" required>
+
+        <label for="pret">Preț (lei)</label>
+        <input type="number" id="pret" name="pret" value="{{ telefon.pret }}" required>
+
+        <label for="NotaProdus">Notă Produs</label>
+        <input type="number" step="0.1" id="NotaProdus" name="NotaProdus" value="{{ telefon.NotaProdus }}">
+
+        <label for="Disponibilitate">Disponibilitate</label>
+        <input type="text" id="Disponibilitate" name="Disponibilitate" value="{{ telefon.Disponibilitate }}">
+
+        <label for="OptiuneLivrare">Opțiune Livrare</label>
+        <input type="text" id="OptiuneLivrare" name="OptiuneLivrare" value="{{ telefon.OptiuneLivrare }}">
+
+        <button type="submit">Salvează Modificările</button>
+    </form>
+
+    <a class="back-link" href="/admin-dashboard/cautare_telefon/">&larr; Înapoi la căutare</a>
+</main>
+
+</body>
+</html>
