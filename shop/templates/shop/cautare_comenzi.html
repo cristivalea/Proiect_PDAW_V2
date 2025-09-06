@@ -1,0 +1,97 @@
+{#<!DOCTYPE html>#}
+{#<html lang="ro">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Căutare Comenzi</title>#}
+{#    <style>#}
+{#        body { font-family: Arial; padding: 20px; background: #f4f4f4; }#}
+{#        table { width: 100%; background: white; border-collapse: collapse; margin-top: 20px; }#}
+{#        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }#}
+{#        input[type="text"] { padding: 10px; width: 200px; }#}
+{#        button { padding: 10px 15px; background: #d50000; color: white; border: none; }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Caută comenzi după user_id</h1>#}
+{#    <form method="get">#}
+{#        <input type="text" name="user_id" placeholder="Introdu user_id" value="{{ user_id }}">#}
+{#        <button type="submit">Caută</button>#}
+{#    </form>#}
+{##}
+{#    {% if comenzi %}#}
+{#        <h2>Rezultate pentru user_id = {{ user_id }}</h2>#}
+{#        <table>#}
+{#            <tr>#}
+{#                <th>ID Comandă</th>#}
+{#                <th>Data</th>#}
+{#                <th>Total</th>#}
+{#                <th>Status</th>#}
+{#            </tr>#}
+{#            {% for comanda in comenzi %}#}
+{#            <tr>#}
+{#                <td>{{ comanda.id }}</td>#}
+{#                <td>{{ comanda.order_date }}</td>#}
+{#                <td>{{ comanda.total }}</td>#}
+{#                <td>{{ comanda.status }}</td>#}
+{#            </tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{#    {% elif user_id %}#}
+{#        <p>Nicio comandă găsită pentru user_id {{ user_id }}.</p>#}
+{#    {% endif %}#}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Căutare Comenzi</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+        table { width: 100%; background: white; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+        input[type="text"] { padding: 10px; width: 200px; }
+        button { padding: 10px 15px; background: #d50000; color: white; border: none; cursor: pointer; }
+        a.edit-link { color: #007bff; text-decoration: none; margin-right: 10px; }
+        a.edit-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Caută comenzi după user_id</h1>
+    <form method="get">
+        <input type="text" name="user_id" placeholder="Introdu user_id" value="{{ user_id }}">
+        <button type="submit">Caută</button>
+    </form>
+
+    {% if comenzi %}
+        <h2>Rezultate pentru user_id = {{ user_id }}</h2>
+        <table>
+            <tr>
+                <th>ID Comandă</th>
+                <th>Data</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Acțiuni</th>
+            </tr>
+            {% for comanda in comenzi %}
+            <tr>
+                <td>{{ comanda.id }}</td>
+                <td>{{ comanda.order_date }}</td>
+                <td>{{ comanda.total }}</td>
+                <td>{{ comanda.status }}</td>
+                <td>
+                    <a href="{% url 'update_comanda' comanda.id %}" class="edit-link">Editează</a>
+                    <form action="{% url 'delete_comanda' comanda.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Sigur vrei să ștergi comanda #{{ comanda.id }}?');">Șterge</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% elif user_id %}
+        <p>Nicio comandă găsită pentru user_id {{ user_id }}.</p>
+    {% endif %}
+</body>
+</html>

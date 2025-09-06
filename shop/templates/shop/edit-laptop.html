@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editare Laptop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #d50000;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-icons a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d50000;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #d50000;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #d50000;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #c40000;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            color: #d50000;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">Magazin Electronice - Admin</div>
+    <div class="header-icons">
+        <a href="#"><i class="fas fa-user"></i></a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+</header>
+
+<main>
+    <h1>Editare Laptop</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="serielaptop">Serie Laptop</label>
+        <input type="text" id="serielaptop" name="serielaptop" value="{{ laptop.serielaptop }}" readonly>
+
+        <label for="nume">Model</label>
+        <input type="text" id="nume" name="nume" value="{{ laptop.nume }}" required>
+
+        <label for="pret">Preț (lei)</label>
+        <input type="number" id="pret" name="pret" value="{{ laptop.pret }}" required>
+
+        <label for="memorie_ram">Memorie RAM (GB)</label>
+        <input type="number" id="memorie_ram" name="memorie_ram" value="{{ laptop.memorie_ram }}" required>
+
+        <label for="procesor">Procesor</label>
+        <input type="text" id="procesor" name="procesor" value="{{ laptop.procesor }}" required>
+
+        <button type="submit">Salvează Modificările</button>
+    </form>
+
+    <a class="back-link" href="/admin-dashboard/cautare_laptop/">&larr; Înapoi la căutare</a>
+</main>
+
+</body>
+</html>

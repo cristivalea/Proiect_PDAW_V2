@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ telefon.Brand }} {{ telefon.Model }} - Detalii</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        nav {
+            background-color: #343a40;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            margin: 30px 0 20px;
+            color: #212529;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: red;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            font-size: 15px;
+        }
+        .card ul li {
+            margin-bottom: 8px;
+        }
+         .btn-back {
+            display: inline-block;
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Acasă</a>
+        <a href="/telefoane/">Telefoane</a>
+        <a href="/tablete/">Tablete</a>
+        <a href="/laptopuri/">Laptopuri</a>
+    </nav>
+
+    <h1>Detalii Telefon</h1>
+    <div class="container">
+        <div class="card">
+            <h2>{{ telefon.Brand }} {{ telefon.Model }}</h2>
+            <ul>
+                <li><strong>Sistem de operare:</strong> {{ telefon.SistemOperare }}</li>
+                <li><strong>RAM:</strong> {{ telefon.CapacitateRAM }} GB</li>
+                <li><strong>Memorie internă:</strong> {{ telefon.CapacitateMemorie }} GB</li>
+                <li><strong>Culoare:</strong> {{ telefon.Culoare }}</li>
+                <li><strong>Dimensiuni:</strong> {{ telefon.Lungime }} x {{ telefon.Latime }} x {{ telefon.Grosime }} mm</li>
+                <li><strong>Diagonala:</strong> {{ telefon.Diagonala }} inchi</li>
+                <li><strong>Greutate:</strong> {{ telefon.Greutate }} g</li>
+                <li><strong>Acumulator:</strong> {{ telefon.CapacitateAcumulator }} mAh</li>
+                <li><strong>Material:</strong> {{ telefon.Material }}</li>
+                <li><strong>Rezoluție:</strong> {{ telefon.Rezolutie }}</li>
+                <li><strong>Nota produs:</strong> {{ telefon.NotaProdus }}</li>
+                <li><strong>Disponibilitate:</strong> {{ telefon.Disponibilitate }}</li>
+                <li><strong>Livrare:</strong> {{ telefon.OptiuneLivrare }}</li>
+                <li><strong>Preț:</strong> {{ telefon.pret }} RON</li>
+            </ul>
+             <div class="button-wrapper">
+                <a href="/telefoane/" class="btn-back">Înapoi la listă</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

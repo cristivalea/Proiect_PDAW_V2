@@ -1,0 +1,86 @@
+<!-- shop/templates/shop/update_comanda.html -->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Editează Comanda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #d50000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b30000;
+        }
+        .errorlist {
+            color: red;
+            margin-top: 5px;
+            margin-bottom: 0;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #d50000;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center; color:#d50000;">Editează Comanda</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <ul class="errorlist">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Salvează modificările</button>
+    </form>
+    <div style="text-align:center;">
+        <a href="{% url 'cauta_comenzi_dupa_user' %}">← Înapoi la căutare comenzi</a>
+    </div>
+</body>
+</html>

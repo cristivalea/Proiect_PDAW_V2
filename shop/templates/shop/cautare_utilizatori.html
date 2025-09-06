@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Căutare Utilizatori</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; }
+        header { background-color: #d50000; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8em; font-weight: bold; }
+        .header-icons { display: flex; gap: 20px; }
+        .header-icons a { color: white; text-decoration: none; font-size: 1.2em; }
+        main { padding: 40px 20px; text-align: center; }
+        h1 { color: #d50000; margin-bottom: 30px; }
+        form.search-form { margin-bottom: 30px; }
+        input[type="text"] { padding: 10px; width: 250px; border-radius: 5px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; background-color: #d50000; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
+        button:hover { background-color: #c40000; }
+        table { width: 100%; max-width: 900px; margin: 0 auto; border-collapse: collapse; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: center; }
+        th { background-color: #f5f5f5; }
+        .actions a { margin: 0 5px; text-decoration: none; color: #d50000; }
+        .actions a:hover { text-decoration: underline; }
+        .no-results { color: red; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">Magazin Electronice - Admin</div>
+    <div class="header-icons">
+        <a href="#"><i class="fas fa-user"></i></a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+</header>
+
+<main>
+    <h1>Căutare Utilizatori</h1>
+
+    <form method="get" class="search-form">
+        <input type="text" name="q" placeholder="Caută după prenume..." value="{{ query }}">
+        <button type="submit">Caută</button>
+    </form>
+
+    {% if query %}
+        {% if utilizatori %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nume complet</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Staff</th>
+                        <th>Activ</th>
+                        <th>Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in utilizatori %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.is_staff|yesno:"✔,✘" }}</td>
+                        <td>{{ user.is_active|yesno:"✔,✘" }}</td>
+                        <td class="actions">
+                            <a href="/admin-dashboard/editare_utilizator/{{ user.id }}/"><i class="fas fa-edit"></i> Editează</a>
+                            <a href="/admin-dashboard/sterge_utilizator/{{ user.id }}/" onclick="return confirm('Sigur dorești să ștergi acest utilizator?');"><i class="fas fa-trash"></i> Șterge</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-results">Nu s-au găsit utilizatori cu prenumele „{{ query }}”.</p>
+        {% endif %}
+    {% endif %}
+</main>
+
+</body>
+</html>

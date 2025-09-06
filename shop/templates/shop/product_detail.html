@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalii produs - {{ laptop.brand }} {{ laptop.model }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Detalii produs</h1>
+        <nav>
+            <a href="{% url 'index' %}">Acasă</a> |
+            <a href="{% url 'cart' %}">Coș</a>
+        </nav>
+    </header>
+    <main>
+        <h2>{{ laptop.brand }} {{ laptop.model }}</h2>
+        <ul class="product-details">
+            <li><strong>Serial:</strong> {{ laptop.serielaptop }}</li>
+            <li><strong>Tip:</strong> {{ laptop.tiplaptop }}</li>
+            <li><strong>Procesor:</strong> {{ laptop.procesor }}</li>
+            <li><strong>Memorie RAM:</strong> {{ laptop.memorie_ram }} GB</li>
+            <li><strong>Stocare:</strong> {{ laptop.stocare }} {{ laptop.unitati_masura }}</li>
+            <li><strong>Placă video:</strong> {{ laptop.gpu }}</li>
+            <li><strong>Display:</strong> {{ laptop.display }}</li>
+            <li><strong>Porturi:</strong> {{ laptop.porturi }}</li>
+            <li><strong>Sistem de operare:</strong> {{ laptop.sistem_operare }}</li>
+            <li><strong>Greutate:</strong> {{ laptop.greutate }} Kg</li>
+            <li><strong>Preț:</strong> {{ laptop.pret }} RON</li>
+            <li><strong>Rating produs:</strong> {{ laptop.nota_produs }}</li>
+            <li><strong>Disponibilitate:</strong>
+                {% if laptop.disponibilitate %}
+                    Disponibil
+                {% else %}
+                    Indisponibil
+                {% endif %}
+            </li>
+            <li><strong>Opțiuni de livrare:</strong> {{ laptop.optiune_livrare }}</li>
+        </ul>
+        <button onclick="addToCart('{{ laptop.serielaptop }}')">Adaugă în coș</button>
+    </main>
+    <footer>
+        <p>&copy; 2025 Magazin Online</p>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

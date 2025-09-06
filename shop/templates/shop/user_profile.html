@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Utilizator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            padding: 20px;
+        }
+        .profile-container {
+            background: white;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #d50000;
+            text-align: center;
+        }
+        .profile-field {
+            margin-bottom: 15px;
+        }
+        .profile-field label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Profilul utilizatorului</h2>
+        <div class="profile-field"><label>ID:</label> {{ user_data.id }}</div>
+        <div class="profile-field"><label>Nume utilizator:</label> {{ user_data.username }}</div>
+        <div class="profile-field"><label>Email:</label> {{ user_data.email }}</div>
+        <div class="profile-field"><label>Nume:</label> {{ user_data.last_name }}</div>
+        <div class="profile-field"><label>Prenume:</label> {{ user_data.first_name }}</div>
+        <div class="profile-field"><label>Data înregistrării:</label> {{ user_data.date_joined }}</div>
+        <div class="profile-field"><label>Este staff:</label> {{ user_data.is_staff|yesno:"Da,Nu" }}</div>
+        <div class="profile-field"><label>Este activ:</label> {{ user_data.is_active|yesno:"Da,Nu" }}</div>
+    </div>
+</body>
+</html>
